@@ -1,0 +1,11 @@
+{% extends 'station/base.html' %}
+
+{% block content %}
+
+        <h1>Создание пользователя</h1>
+        <form method="POST" class="art-form">{% csrf_token %}
+              {{ form.as_p }}
+              <button type="submit" class="save btn btn-default">Сохранить</button>
+        </form>
+
+{% endblock %}

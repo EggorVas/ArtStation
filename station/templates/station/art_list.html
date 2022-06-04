@@ -1,0 +1,104 @@
+{% extends 'station/base.html' %}
+
+{% block content %}
+    {% if not arts and not postFilters %}
+        <h2 class="art"><br>Данный список пуст.</h2>
+    {% else %}
+
+
+        <div class="art">
+            <div class="container" style="margin-bottom:-60pt">
+              <form method="POST"> {% csrf_token %}
+
+                <div class="actions">
+                    <label class="art" style="font-size:12px">Сортировка по: <select name="sorting">
+                        {% for sort in sorts %}
+                            {% if sort.0 == postFilters.0 %}
+                                <option value={{ sort.0 }} selected>{{ sort.1 }}</option>
+                            {% else %}
+                                <option value={{ sort.0 }}>{{ sort.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select></label>
+
+                    <label class="art" style="margin-left:10px; font-size:12px">Фильтрация по стилю: <select name="styleFilt">
+                        <option value="None">-----------------------</option>
+                        {% for style in styles %}
+                            {% if style.0 == postFilters.1 %}
+                                <option value={{ style.0 }} selected>{{ style.1 }}</option>
+                            {% else %}
+                                <option value={{ style.0 }}>{{ style.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select></label>
+
+                    <label class="art" style="margin-left:10px; font-size:12px">по жанру: <select name="genreFilt">
+                        <option value="None">----------------------</option>
+                        {% for genre in genres %}
+                            {% if genre.0 == postFilters.2 %}
+                                <option value={{ genre.0 }} selected>{{ genre.1 }}</option>
+                            {% else %}
+                                <option value={{ genre.0 }}>{{ genre.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select></label>
+
+                    <label class="art" style="margin-left:10px; font-size:12px">по технике: <select name="techniqueFilt">
+                        <option value="None">-----------------</option>
+                        {% for technique in techniques %}
+                            {% if technique.0 == postFilters.3 %}
+                                <option value={{ technique.0 }} selected>{{ technique.1 }}</option>
+                            {% else %}
+                                <option value={{ technique.0 }}>{{ technique.1 }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select></label>
+
+                    <button type="submit" class="button" style="margin-left:10px; font-size:12px">Выполнить</button>
+                </div>
+
+              </form>
+            </div>
+        </div>
+
+        {% if not arts %}
+            <h2 class="art"><br>Данный список пуст.</h2>
+
+        {% else %}
+        {% for art in arts %}
+            <div class="art">
+                <div class="container">
+                    <div class="row" style="background: #f0f0f0">
+
+                        <div class="col-lg-4" align=right>
+                            <br>
+                            <a href="{% url 'art_detail' pk=art.pk %}">
+                            {% if art.image.width > art.image.height %}
+                                <img src="{{ art.image.url }}" alt=art.name width = "300" class="border border-danger rounded-top rounded-bottom">
+                            {% else %}
+                                <img src="{{ art.image.url }}" alt=art.name height = "300" class="border border-danger rounded-top rounded-bottom">
+                            {% endif %}
+                            </a>
+                            <p>{{ art.published_date }}</p>
+                        </div>
+
+                        <div class="col-lg-8">
+                            <h1><a href="{% url 'art_detail' pk=art.pk %}">{{ art.name }}</a></h1>
+                            <h4 style="margin-left:10pt; margin-top:-15pt">{{ art.author }}</h4>
+                            {% for desc in art.description %}
+                                <p style="margin-bottom:0pt; margin-top:0pt">{{ desc }}</p>
+                            {% endfor %}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        {% endfor %}
+        {% endif %}
+
+    {% endif %}
+
+{% endblock %}

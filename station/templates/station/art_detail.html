@@ -1,0 +1,65 @@
+{% extends 'station/base.html' %}
+
+{% block content %}
+        <div class="container">
+            <div class="row" style="background: #f0f0f0">
+
+                <div class="col-lg-6" align=right>
+                    {% if art.image.width > art.image.height %}
+                        <img src="{{ art.image.url }}" alt=art.name width = "500" class="border border-danger rounded-top rounded-bottom">
+                    {% else %}
+                        <img src="{{ art.image.url }}" alt=art.name height = "600" class="border border-danger rounded-top rounded-bottom">
+                    {% endif %}
+                </div>
+
+                <div class="col-lg-6">
+                    <h1>{{ art.name }}</h1>
+                    <h4 style="margin-left:10pt; margin-top:-15pt">{{ art.author }}</h4>
+                    {% for desc in art.description %}
+                        <h4 style="margin-bottom:0pt; margin-top:0pt">{{ desc }}</h4>
+                    {% endfor %}
+                </div>
+
+            </div>
+            <div class="row" align=right>
+                <div class="col-lg-6">
+                    <div class="col-lg-6" align=center>
+                        {% if user.is_authenticated %}
+                            {% if not isliked %}
+                                <a href="{% url 'new_art_favorite' pk=art.pk %}" class="favor0"><span class="glyphicon glyphicon-heart"></span>
+                                <h5 style="margin-top: -3px"> Добавить в избранное </h5></a>
+                            {% else %}
+                                <a href="{% url 'new_art_favorite' pk=art.pk %}" class="favor1"><span class="glyphicon glyphicon-heart"></span>
+                                <h5 style="margin-top: -3px"> Уже в избранном </h5></a>
+                            {% endif %}
+                        {% endif %}
+                        <h4 style="margin-top:20px">Публикация {{ art.published_date }}</h4>
+                    </div>
+                    <div class="col-lg-6" align=right>
+                      <h4>Стиль: {{ art.get_style_display }}
+                      <br>Жанр: {{ art.get_genre_display }}
+                      <br>Техника: {{ art.get_technique_display }}
+                      <br></h4>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="col-lg-6" align=left>
+                        {% if user == owner %}
+                            <div class="row">
+                              <a href="{% url 'art_edit' pk=art.pk %}" class="edit"><span class="glyphicon glyphicon-pencil" style="margin-top:10pt">Редактировать</span></a>
+                            </div>
+                            <div class="row">
+                              <a href="{% url 'art_delete' pk=art.pk %}" class="edit"><span class="glyphicon glyphicon-remove" style="margin-top:10pt; margin-bottom:10pt">Удалить</span></a>
+                            </div>
+                        {% endif %}
+                    </div>
+                    <div class="col-lg-6">
+                        <h4>Владелец — {{ art.owner }}:
+                        <br>{{ owner.email }}<span class="glyphicon glyphicon-envelope"></span></h4>
+                    </div>
+                <div>
+
+            </div>
+        </div>
+
+{% endblock %}

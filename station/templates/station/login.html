@@ -1,0 +1,23 @@
+{% extends 'station/base.html' %}
+
+{% block content %}
+
+    <h1>Вход за пользователя</h1>
+    <form method="POST" class="art-form"><input type="hidden">{% csrf_token %}
+        {% if info %}
+            <p><i>{{ info }}</i></p>
+        {% endif %}
+        <p>
+            <label for="id_username">Имя пользователя:</label>
+            <input type="text" name="username" maxlength="150" required="" id="id_username">
+
+            <span class="helptext">Обязательное поле. Не более 150 символов. Только буквы, цифры и символы @/./+/-/_.</span>
+        </p>
+        <p>
+            <label for="id_password">Пароль:</label>
+            <input type="text" name="password" maxlength="128" required="" id="id_password">
+        </p>
+        <button type="submit" class="save btn btn-default">Сохранить</button>
+    </form>
+
+{% endblock %}

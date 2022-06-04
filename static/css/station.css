@@ -1,0 +1,73 @@
+.page-header {
+    background-color: #ff9400;
+    margin-top: -30px;
+    padding: 10px 20px 0px 60px;
+}
+
+.page-header h1, .page-header h1 a, .page-header h1 a:visited, .page-header h1 a:active {
+    color: #ffffff;
+    font-size: 28pt;
+    text-decoration: none;
+}
+.page-header h3, .page-header h3 a, .page-header h3 a:visited, .page-header h3 a:active {
+    color: #ffffff;
+    text-decoration: none;
+}
+
+.content {
+    margin-left: 20px;
+}
+
+h1, h2, h3 {
+    font-family: 'Lobster', cursive;
+}
+
+.date {
+    font-family: 'Lobster', cursive;
+    color: #828282;
+}
+
+.save {
+    float: right;
+}
+
+.art-form textarea, .art-form input {
+    width: 100%;
+}
+
+.top-menu, .top-menu:hover, .top-menu:visited {
+    color: #ffffff;
+    float: right;
+    font-size: 16pt;
+    margin-right: 0px;
+    margin-top: 50px;
+    text-decoration: none;
+}
+
+.favor0, .favor0:hover, .favor0:visited{
+    color: #ff3333;
+    font-size: 26pt;
+}
+
+.favor1, .favor1:hover, .favor1:visited{
+    color: #880000;
+    font-size: 26pt;
+}
+
+.edit, .edit:hover, .edit:visited{
+    color: inherit;
+    font-size: 16pt;
+}
+
+.art {
+    margin-bottom: 40px;
+}
+
+.art h1 a, .art h1 a:visited {
+    color: #404040;
+}
+
+.art p, h1, h4 {
+  text-indent: 10px;
+  line-height: 150%
+}

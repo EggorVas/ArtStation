@@ -1,0 +1,64 @@
+{% load static %}
+<html>
+    <head>
+        <title>ArtLovers</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="{% static 'css/station.css' %}">
+        <link href="https://fonts.googleapis.com/css?family=Lobster&subset=latin,cyrillic" rel="stylesheet" type="text/css">
+    </head>
+
+    <body style="background-color:#EAE7DC">
+        <div class="page-header">
+          <div class="container">
+            <div class="col-lg-3">
+                <h1><a href="/">ArtLovers
+                <br><small><small><span style="color: #F0F0F0">Онлайн-выставка картин</span></small></small> </a></h1>
+            </div>
+            <div class="col-lg-9">
+
+                <div class="col-lg-6" align=center>
+                    {% if isowner %}
+                        <h3><a href="{% url 'art_new' %}" class="top-menu">Добавить картину <span class="glyphicon glyphicon-plus"></span></a></h3>
+                    {% elif user.is_authenticated and isowner == False %}
+                        <h3><span class="top-menu" style="font-size:10pt"> За разрешением на добавление картин обращайтесь к администратору: {{ admin_email }} </span></h3>
+                    {% endif %}
+                </div>
+                <div class="col-lg-6">
+                  {% if user.is_authenticated %}
+                      <div class="col-lg-8" align=right>
+                        <h3><a href="{% url 'art_favorites'%}" class="top-menu">Избранное <span class="glyphicon glyphicon-heart"></span></a></h3>
+                      </div>
+                      <div class="col-lg-4" align=right>
+                        <h3><a href="{% url 'log_out' %}" class="top-menu">Выход <span class="glyphicon glyphicon-off"></span></a></h3>
+                      </div>
+                  {% else %}
+                      <div class="col-lg-6" align=right>
+                        <h3><a href="{% url 'log_in' %}" class="top-menu">Вход <span class="glyphicon glyphicon-user"></span></a></h3>
+                      </div>
+                      <div class="col-lg-6" align=right>
+                        <h3><a href="{% url 'registration' %}" class="top-menu">Регистрация <span class="glyphicon glyphicon-pencil"></span></a></h3>
+                      </div>
+                  {% endif %}
+                </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="content container">
+            <div class="row">
+                <div class="col-lg-8">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-8">
+
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

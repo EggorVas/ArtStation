@@ -1,0 +1,21 @@
+{% extends 'station/base.html' %}
+
+{% block content %}
+
+
+<div class="art">
+    <div class="container" style="margin-bottom:-30pt">
+      <form method="POST"> {% csrf_token %}
+
+          <div class="actions" align=center>
+              <h4>Вы действительно желаете удалить картину "{{ art.name }}"?</h4>
+              <div><input type="checkbox" name="confirm" id="cb"><label for="cb"><h4>Да, хочу удалить</h4></label></div>
+              <button type="submit" class="button">Продолжить</button>
+          </div>
+
+      </form>
+    </div>
+</div>
+
+
+{% endblock %}
